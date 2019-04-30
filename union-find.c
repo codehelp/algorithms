@@ -42,7 +42,7 @@ int check(const int array[], int n)
 	return 0;
 }
 
-void setup_program_1_1(int id[]){
+void setup_program_1(int id[]){
 	int i;
 	for (i=0; i < N; i++) id[i] = i;
 	for (i = 0; i < N; i++) {
@@ -83,60 +83,54 @@ int program_1_1(int p, int q, int id[])
 }
 
 
-void
-program_1_2(void)
+int
+program_1_2(int p, int q, int id[])
 {
-	int i, p, q, j, t, id[N];
-	for (i=0; i < N; i++) id[i] = i;
+	int i, j, t;
+	for (i = p; i != id[i]; i = id[i]);
+	for (j = q; j != id[j]; j = id[j]);
+	if (i == j) return 0;
+	id[i] = j;
+	for (t = id[p], i=0; i < N; i++) {
+		if (id[i] == t) id[i] = id[q];
+	}
 	for (i = 0; i < N; i++) {
 		printf("%d ", id[i]);
 	}
 	printf("\n");
-	while(scanf("%d %d", &p, &q) == 2)
-	{
-		for (i = p; i != id[i]; i = id[i]);
-		for (j = q; j != id[j]; j = id[j]);
-		if (i == j) continue;
-		id[i] = j;
-		for (t = id[p], i=0; i < N; i++) {
-			if (id[i] == t) id[i] = id[q];
-		}
-		for (i = 0; i < N; i++) {
-			printf("%d ", id[i]);
-		}
-		printf("\n");
-		printf("\t%d %d\n", p, q);
-	}
+	printf("\t%d %d\n", p, q);
+	return 0;
 }
 
-
-void
-program_1_3(void)
-{
-	/* Program 1.3 */
+void setup_program_1_3(int id[], int sz[]){
 	// sz keeps the number of nodes in the tree for each id[i] == i
-	int i, j, p, q, id[N], sz[N];
-	// id starts with a sequential integer array
+	int i;
+	// reset id to start with a sequential integer array using sz
 	for (i = 0; i < N; i++) {
 		id[i] = i;
 		sz[i] = 1;
 	}
-	while (scanf("%d %d", &p, &q) == 2)
-	{
-		// loop through id, incrementing based on the initial values within id
-		for (i = p; i != id[i]; i = id[i]);
-		for (j = q; j != id[j]; j = id[j]);
-		// i is the position of p in id
-		// j is the position of q in id
-		if (i == j) continue;
-		// make a union, smaller into larger
-		if (sz[i] < sz[j]) {
-			id[i] = j;
-			sz[j] += sz[i];
-		} else {
-			id[j] = i;
-			sz[i] += sz[j];
-		}
-		printf(" %d %d\n", p, q);
+}
+
+int
+program_1_3(int p, int q, int id[], int sz[])
+{
+	/* Program 1.3 */
+	int i, j;
+	// loop through id, incrementing based on the initial values within id
+	for (i = p; i != id[i]; i = id[i]);
+	for (j = q; j != id[j]; j = id[j]);
+	// i is the position of p in id
+	// j is the position of q in id
+	if (i == j) return 0;
+	// make a union, smaller into larger
+	if (sz[i] < sz[j]) {
+		id[i] = j;
+		sz[j] += sz[i];
+	} else {
+		id[j] = i;
+		sz[i] += sz[j];
 	}
+	printf(" %d %d\n", p, q);
+	return 0;
 }

@@ -31,14 +31,29 @@ int main(int argc, char **argv)
 	int p, q;
 	int id[N];
 
-	setup_program_1_1(id);
+	setup_program_1(id);
 	while(scanf("%d %d", &p, &q) == 2) {
 		if (program_1_1(p, q, id) == 0) {
 			return 0;
 		}
 	}
-	// program_1_2();
-	// program_1_3();
+
+	setup_program_1(id);
+	while(scanf("%d %d", &p, &q) == 2) {
+		if (program_1_2(p, q, id) == 0) {
+			return 0;
+		}
+	}
+
+
+	int sz[N];
+	setup_program_1_3(id, sz);
+	while(scanf("%d %d", &p, &q) == 2) {
+		if (program_1_3(p, q, id, sz) == 0) {
+			return 0;
+		}
+	}
+
 	return 0;
 }
 

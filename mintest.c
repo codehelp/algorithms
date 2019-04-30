@@ -40,7 +40,7 @@ static char * test_end_state() {
 static char * test_connectivity() {
 	int i, id[N], ret;
 	for (i=0; i < N; i++) id[i] = i;
-	setup_program_1_1(id);
+	setup_program_1(id);
 	ret = program_1_1(3, 4, id);
 	mu_assert("error, failed to detect new connection 3 4", ret == 1);
 	ret = program_1_1(4, 9, id);

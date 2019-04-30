@@ -27,12 +27,10 @@ int check(const int array[], int n);
 
 int program_1_1(int, int, int []);
 
-void setup_program_1_1(int []);
+void setup_program_1(int []);
 
-void program_1_2(void);
+void setup_program_1_3(int [], int []);
 
-void setup_program_1_2(void);
+int program_1_2(int, int, int []);
 
-void setup_program_1_3(void);
-
-void program_1_3(void);
+int program_1_3(int, int, int [], int []);
