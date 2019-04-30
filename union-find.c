@@ -89,7 +89,7 @@ program_1_2(int p, int q, int id[])
 	int i, j, t;
 	for (i = p; i != id[i]; i = id[i]);
 	for (j = q; j != id[j]; j = id[j]);
-	if (i == j) return 0;
+	if (i == j) return 2;
 	id[i] = j;
 	for (t = id[p], i=0; i < N; i++) {
 		if (id[i] == t) id[i] = id[q];
@@ -99,7 +99,7 @@ program_1_2(int p, int q, int id[])
 	}
 	printf("\n");
 	printf("\t%d %d\n", p, q);
-	return 0;
+	return 1;
 }
 
 void setup_program_1_3(int id[], int sz[]){
@@ -122,7 +122,7 @@ program_1_3(int p, int q, int id[], int sz[])
 	for (j = q; j != id[j]; j = id[j]);
 	// i is the position of p in id
 	// j is the position of q in id
-	if (i == j) return 0;
+	if (i == j) return 2;
 	// make a union, smaller into larger
 	if (sz[i] < sz[j]) {
 		id[i] = j;

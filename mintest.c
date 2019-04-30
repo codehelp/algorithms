@@ -37,7 +37,7 @@ static char * test_end_state() {
 	return 0;
 }
 
-static char * test_connectivity() {
+static char * test_connectivity_1() {
 	int i, id[N], ret;
 	for (i=0; i < N; i++) id[i] = i;
 	setup_program_1(id);
@@ -62,15 +62,50 @@ static char * test_connectivity() {
 	ret = program_1_1(5, 6, id);
 	mu_assert("error, failed to detect existing connection 5 6", ret == 2);
 	ret = program_1_1(0, 2, id);
-	mu_assert("error, failed to detect existing connection 5 6", ret == 2);
+	mu_assert("error, failed to detect existing connection 0 2", ret == 2);
 	ret = program_1_1(6, 1, id);
-	mu_assert("error, failed to completed connection2 6 1", ret == 0);
+	mu_assert("error, failed to completed connection 6 1", ret == 0);
+	return 0;
+}
+
+static char * test_connectivity_2() {
+	/*
+	 * Note: the tree representation differs from _1
+	 */
+	int i, id[N], ret;
+	for (i=0; i < N; i++) id[i] = i;
+	setup_program_1(id);
+	ret = program_1_2(3, 4, id);
+	mu_assert("error, failed to detect new connection 3 4", ret == 1);
+	ret = program_1_2(4, 9, id);
+	mu_assert("error, failed to detect new connection 4 9", ret == 1);
+	ret = program_1_2(8, 0, id);
+	mu_assert("error, failed to detect new connection 8 0", ret == 1);
+	ret = program_1_2(2, 3, id);
+	mu_assert("error, failed to detect new connection 2 3", ret == 1);
+	ret = program_1_2(5, 6, id);
+	mu_assert("error, failed to detect new connection 5 6", ret == 1);
+	ret = program_1_2(2, 9, id);
+	mu_assert("error, failed to detect existing connection 2 9", ret == 2);
+	ret = program_1_2(5, 9, id);
+	mu_assert("error, failed to detect new connection 5 9", ret == 1);
+	ret = program_1_2(7, 3, id);
+	mu_assert("error, failed to detect new connection 7 3", ret == 1);
+	ret = program_1_2(4, 8, id);
+	mu_assert("error, failed to detect new connection 4 8", ret == 1);
+	ret = program_1_2(5, 6, id);
+	mu_assert("error, failed to detect existing connection 5 6", ret == 2);
+	ret = program_1_2(0, 2, id);
+	mu_assert("error, failed to detect existing connection 0 2", ret == 2);
+	ret = program_1_2(6, 1, id);
+	mu_assert("error, failed to detect new connection 6 1", ret == 1);
 	return 0;
 }
 
 static char * all_tests() {
 	mu_run_test(test_end_state);
-	mu_run_test(test_connectivity);
+	mu_run_test(test_connectivity_1);
+	mu_run_test(test_connectivity_2);
 	return 0;
 }
 
