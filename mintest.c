@@ -1,5 +1,5 @@
 /*
- * union-find.h
+ * mintest.c
  *
  * Copyright 2019 Neil Williams <codehelp@debian.org>
  *
@@ -21,18 +21,43 @@
  *
  */
 
-#define N 10
 
-int check(const int array[], int n);
+#include <stdio.h>
+#include "mintest.h"
+#include "union-find.h"
 
-int program_1_1(int, int, int []);
+int tests_run = 0;
 
-void setup_program_1_1(int []);
+int foo = 7;
+int bar = 5;
 
-void program_1_2(void);
+static char * test_end_state() {
+	int i, id[N];
+	for (i=0; i < N; i++) id[i] = 1;
+	mu_assert("error, end state is invalid", check(id, N) == 0);
+	return 0;
+}
 
-void setup_program_1_2(void);
+static char * test_bar() {
+	mu_assert("error, bar != 5", bar == 5);
+	return 0;
+}
 
-void setup_program_1_3(void);
+static char * all_tests() {
+	mu_run_test(test_end_state);
+	mu_run_test(test_bar);
+	return 0;
+}
 
-void program_1_3(void);
+int main(int argc, char **argv) {
+	char *result = all_tests();
+	if (result != 0) {
+		printf("%s\n", result);
+	}
+	else {
+		printf("ALL TESTS PASSED\n");
+	}
+	printf("Tests run: %d\n", tests_run);
+
+	return result != 0;
+}

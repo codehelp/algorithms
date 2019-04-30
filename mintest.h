@@ -1,5 +1,5 @@
 /*
- * union-find.h
+ * mintest.h
  *
  * Copyright 2019 Neil Williams <codehelp@debian.org>
  *
@@ -21,18 +21,6 @@
  *
  */
 
-#define N 10
-
-int check(const int array[], int n);
-
-int program_1_1(int, int, int []);
-
-void setup_program_1_1(int []);
-
-void program_1_2(void);
-
-void setup_program_1_2(void);
-
-void setup_program_1_3(void);
-
-void program_1_3(void);
+#define mu_assert(message, test) do { if (!(test)) return message; } while (0)
+#define mu_run_test(test) do { char *message = test(); tests_run++; \
+                                if (message) return message; } while (0)
