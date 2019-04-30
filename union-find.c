@@ -57,14 +57,14 @@ int program_1_1(int p, int q, int id[])
 	int t;
 	if (id[p] == id[q]) {
 # ifdef DEBUG
-	printf("\t\tFound: ");
-	for (i = 0; i < N; i++) {
-		if (id[i] == q) printf("%d ", i);
-		if (id[i] == p) printf("%d ", i);
-	}
-	printf("\n");
+		printf("\t\tFound: ");
+		for (i = 0; i < N; i++) {
+			if (id[i] == q) printf("%d ", i);
+			if (id[i] == p) printf("%d ", i);
+		}
+		printf("\n");
 # endif
-		return 1;
+		return 2;
 	}
 	t = id[p];
 	for (i=0; i < N; i++) {
