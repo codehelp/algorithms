@@ -86,14 +86,11 @@ int program_1_1(int p, int q, int id[])
 int
 program_1_2(int p, int q, int id[])
 {
-	int i, j, t;
+	int i, j;
 	for (i = p; i != id[i]; i = id[i]);
 	for (j = q; j != id[j]; j = id[j]);
 	if (i == j) return 2;
 	id[i] = j;
-	for (t = id[p], i=0; i < N; i++) {
-		if (id[i] == t) id[i] = id[q];
-	}
 	for (i = 0; i < N; i++) {
 		printf("%d ", id[i]);
 	}

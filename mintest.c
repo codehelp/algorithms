@@ -99,6 +99,8 @@ static char * test_connectivity_2() {
 	mu_assert("error, failed to detect existing connection 0 2", ret == 2);
 	ret = program_1_2(6, 1, id);
 	mu_assert("error, failed to detect new connection 6 1", ret == 1);
+	ret = program_1_2(5, 8, id);
+	mu_assert("error, failed to detect existing connection 5 8", ret == 2);
 	return 0;
 }
 
