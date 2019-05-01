@@ -2,4 +2,5 @@ union-find/algorithm
 union-find/mintest
 heads
 linked-list/linked-list
+linked-list/sorting
 *.o

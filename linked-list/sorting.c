@@ -33,6 +33,9 @@ llink reverse(llink x) {
 	 * maintain a pointer to what has already been processed
 	 * maintain a pointer to the portion not yet processed
 	 * change the node link to point to the previous node
+	 *
+	 * whether the list is sorted or not, all insertions are
+	 * at the start.
 	 */
 	llink t, y = x, r = NULL;
 	while (y != NULL) { // to the end of the list
@@ -55,6 +58,9 @@ int main(int argc, char **argv)
 		t->next = malloc(sizeof *t);
 		t = t->next;
 		t->next = NULL;
+		/* random numbers are limited to within the 0 - 1000 range
+		 * larger values of N will cause duplicate numbers
+		 * but the sorting will still work. */
 		t->item = rand() % 1000;
 		printf("%03d", t->item);
 		if (i != N -1) printf(", ");
@@ -63,9 +69,12 @@ int main(int argc, char **argv)
 
 	b = &headb;
 	b->next = NULL;
-	s = b;
+	s = b; // store start of the sorted list
 
-	// insertion sort
+	/* insertion sort
+	 * node may need to be inserted anywhere in the list
+	 * worst-case: inserts happen at the end of the list
+	 */
 	for (t = a->next; t != NULL; t = u) {
 		u = t->next;
 		for (x = b; x->next != NULL; x = x->next) {
@@ -86,6 +95,7 @@ int main(int argc, char **argv)
 		t = t->next;
 	}
 	printf("\n\nReversed:\n");
+	// create a reverse of the sorted list
 	r = reverse(b);
 	for (i = 0, t = r; i < N; i++) {
 		printf("%03d\n", t->item);
