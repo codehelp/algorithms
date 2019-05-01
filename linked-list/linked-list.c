@@ -34,11 +34,24 @@ int main(int argc, char **argv)
 	t->item = 1;
 	t->next = t;
 	for (i = 2; i <= N; i++) {
-		x = (x->next = malloc(sizeof *x));
-		//x = malloc(sizeof *x);
+		x->next = malloc(sizeof *x);
+		x = x->next;
 		x->item = i;
 		x->next = t;
 	}
+	llink start = x;
+
+	int count = 1;
+	x = t->next;
+	while (x->item != t->item) {
+		count++;
+		x = x->next;
+	}
+	printf("count: %d\n", count);
+	x = t;
+
+	 x = start;
+	printf("start: %d\n", x->item);
 	while (x != x->next) {
 		for (i = 1; i < M; i++) x = x->next;
 		x->next = x->next->next; N--;
