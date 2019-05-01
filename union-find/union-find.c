@@ -24,7 +24,6 @@
 
 #include <stdio.h>
 #define N 10
-#define DEBUG 1
 
 
 // https://stackoverflow.com/questions/41928145/why-arent-scanf-n-n-and-scanf-nc-clearing-a-hanging-newli
@@ -42,6 +41,19 @@ int check(const int array[], int n)
 	return 0;
 }
 
+double average(const int array[], int n)
+{
+	int sum = 0;
+
+	for (int i = 0; i < n; i++)
+	{
+		sum += array[i] - 1;
+	}
+	printf("sum %d\n");
+	return sum / (double)n;
+}
+
+
 void setup_program_1(int id[]){
 	int i;
 	for (i=0; i < N; i++) id[i] = i;
@@ -53,17 +65,11 @@ void setup_program_1(int id[]){
 
 int program_1_1(int p, int q, int id[])
 {
+	/* Quick Find */
 	int i;
 	int t;
 	if (id[p] == id[q]) {
-# ifdef DEBUG
-		printf("\t\tFound: ");
-		for (i = 0; i < N; i++) {
-			if (id[i] == q) printf("%d ", i);
-			if (id[i] == p) printf("%d ", i);
-		}
-		printf("\n");
-# endif
+		printf("\t\tFound\n");
 		return 2;
 	}
 	t = id[p];
@@ -86,6 +92,7 @@ int program_1_1(int p, int q, int id[])
 int
 program_1_2(int p, int q, int id[])
 {
+	/* Quick Union */
 	int i, j;
 	for (i = p; i != id[i]; i = id[i]);
 	for (j = q; j != id[j]; j = id[j]);
@@ -112,7 +119,7 @@ void setup_program_1_3(int id[], int sz[]){
 int
 program_1_3(int p, int q, int id[], int sz[])
 {
-	/* Program 1.3 */
+	/* Weighted quick union */
 	int i, j;
 	// loop through id, incrementing based on the initial values within id
 	for (i = p; i != id[i]; i = id[i]);
@@ -129,5 +136,48 @@ program_1_3(int p, int q, int id[], int sz[])
 		sz[i] += sz[j];
 	}
 	printf(" %d %d\n", p, q);
+	for (i = 0; i < N; i++) {
+		printf("%d ", id[i]);
+	}
+	printf("\n");
+	for (i = 0; i < N; i++) {
+		printf("%d ", sz[i]);
+	}
+	printf("\n");
+	return 0;
+}
+
+int
+program_1_4(int p, int q, int id[], int sz[])
+{
+	/* weighted quick union with halving */
+	int i, j;
+	// loop through id, incrementing based on the initial values within id
+	for (i = p; i != id[i]; i = id[i]) {
+		id[i] = id[id[i]];  // path compression by halving
+	}
+	for (j = q; j != id[j]; j = id[j]) {
+		id[j] = id[id[j]];
+	}
+	// i is the position of p in id
+	// j is the position of q in id
+	if (i == j) return 2;
+	// make a union, smaller into larger
+	if (sz[i] < sz[j]) {
+		id[i] = j;
+		sz[j] += sz[i];
+	} else {
+		id[j] = i;
+		sz[i] += sz[j];
+	}
+	printf(" %d %d\n", p, q);
+	for (i = 0; i < N; i++) {
+		printf("%d ", id[i]);
+	}
+	printf("\n");
+	for (i = 0; i < N; i++) {
+		printf("%d ", sz[i]);
+	}
+	printf("\n");
 	return 0;
 }

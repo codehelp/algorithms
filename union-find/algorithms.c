@@ -1,5 +1,5 @@
 /*
- * union-find.h
+ * algorithms.c
  *
  * Copyright 2019 Neil Williams <codehelp@debian.org>
  *
@@ -21,16 +21,48 @@
  *
  */
 
-#define N 10
 
-int check(const int array[], int n);
+#include <stdio.h>
+#include <math.h>
+#include "union-find.h"
 
-int program_1_1(int, int, int []);
 
-void setup_program_1(int []);
+int main(int argc, char **argv)
+{
+	int p, q;
+	int id[N];
+/*
+	setup_program_1(id);
+	while(scanf("%d %d", &p, &q) == 2) {
+		if (program_1_1(p, q, id) == 0) {
+			return 0;
+		}
+	}
+*/
+/*
+	setup_program_1(id);
+	while(scanf("%d %d", &p, &q) == 2) {
+		if (program_1_2(p, q, id) == 0) {
+			return 0;
+		}
+	}
+*/
 
-void setup_program_1_3(int [], int []);
+	int sz[N];
+	//double sum = 0.0;
+	setup_program_1_3(id, sz);
+	while(scanf("%d %d", &p, &q) == 2) {
+		program_1_3(p, q, id, sz) == 0;
+	}
+	printf("%f\n", round(average(sz, N)));
 
-int program_1_2(int, int, int []);
+/*
+	int sz[N];
+	setup_program_1_3(id, sz);
+	while(scanf("%d %d", &p, &q) == 2) {
+		program_1_4(p, q, id, sz) == 0;
+	}
+*/
+	return 0;
+}
 
-int program_1_3(int, int, int [], int []);
