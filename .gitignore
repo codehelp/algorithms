@@ -1,3 +1,5 @@
-algorithm
-mintest
+union-find/algorithm
+union-find/mintest
+heads
+linked-list/linked-list
 *.o
