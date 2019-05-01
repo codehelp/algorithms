@@ -1,7 +1,7 @@
 /*
  * linked-list.c
  * 
- * Copyright 2019 Neil Williams <codehelp@debian.org>
+ * Copyright 2019 Neil Williams <linux@codehelp.co.uk>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,6 +35,7 @@ int main(int argc, char **argv)
 	t->next = t;
 	for (i = 2; i <= N; i++) {
 		x = (x->next = malloc(sizeof *x));
+		//x = malloc(sizeof *x);
 		x->item = i;
 		x->next = t;
 	}
@@ -44,7 +45,6 @@ int main(int argc, char **argv)
 	}
 	printf("%d\n", x->item);
 	free(x);
-	free(t);
 	return 0;
 }
 
