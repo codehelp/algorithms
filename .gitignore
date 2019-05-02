@@ -3,5 +3,6 @@ union-find/mintest
 heads
 linked-list/linked-list
 linked-list/sorting
+linked-list/geometric
 graph/vertices
 *.o
