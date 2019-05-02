@@ -30,7 +30,7 @@ struct node {
 
 typedef llink Node;
 
-llink allocNode(int);
+llink allocNode(int, llink);
 void freeNode(llink x);
 void insertNext(llink, llink);
 llink deleteNext(llink);

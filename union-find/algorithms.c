@@ -52,9 +52,9 @@ int main(int argc, char **argv)
 	//double sum = 0.0;
 	setup_program_1_3(id, sz);
 	while(scanf("%d %d", &p, &q) == 2) {
-		program_1_3(p, q, id, sz) == 0;
+		program_1_3(p, q, id, sz);
 	}
-	printf("%f\n", round(average(sz, N)));
+	printf("%f\n", average(sz, N));
 
 /*
 	int sz[N];

@@ -30,10 +30,14 @@
 // FIXME: why is a fixed length list of nodes required?
 llink initialised_list;
 
-llink allocNode(int value) {
+llink allocNode(int value, llink next) {
 	llink x = malloc(sizeof *x);
 	x->item = value;
-	x->next = x;
+	if (next) {
+		x->next = next;
+	} else {
+		x->next = x;
+	}
 	return x;
 }
 
@@ -83,8 +87,8 @@ int Item(llink x) {
 void demonstrate_alloc_nodes(int N, int M) {
 	int i;
 	Node t, x;
-	for (i = 2, x = allocNode(1); i <= N; i++) {
-		t = allocNode(i);
+	for (i = 2, x = allocNode(1, NULL); i <= N; i++) {
+		t = allocNode(i, NULL);
 		insertNext(x, t);
 		x = t;
 	}
@@ -110,6 +114,17 @@ void demonstrate_init_list(int N, int M) {
 	}
 	printf("%d\n", Item(x));
 }
+
+void demonstrate_adjacency(int V) {
+	int i, j;
+	llink adj[V];
+	for (i = 0; i < V; i++) adj[i] = NULL;
+	while (scanf("%d %d", &i, &j) == 2) {
+		adj[i] = allocNode(i, adj[i]);
+		adj[j] = allocNode(j, adj[j]);
+	}
+}
+
 
 int main(int argc, char **argv)
 {
