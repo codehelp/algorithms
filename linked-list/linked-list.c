@@ -24,7 +24,92 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 #include "linked-list.h"
+
+// FIXME: why is a fixed length list of nodes required?
+llink initialised_list;
+
+llink allocNode(int value) {
+	llink x = malloc(sizeof *x);
+	x->item = value;
+	x->next = x;
+	return x;
+}
+
+void freeNode(llink x) {
+	free(x);
+}
+
+void initNodes(int N) {
+	int i;
+	// FIXME: clarify the pointer arithmetic
+	initialised_list = malloc((N+1)*(sizeof *initialised_list));
+	for (i = 0; i < N + 1; i++)
+		initialised_list[i].next = &initialised_list[i+1];
+	initialised_list[N].next = NULL;
+}
+
+llink newNode(int item_value) {
+	llink x = deleteNext(initialised_list);
+	x->item = item_value;
+	x->next = x;
+	return x;
+}
+
+void forgetNode(llink x) {
+	insertNext(initialised_list, x);
+}
+
+void insertNext(llink x, llink t) {
+	t->next = x->next;
+	x->next = t;
+}
+
+llink deleteNext(llink x) {
+	llink t = x->next;
+	x->next = t->next;
+	return t;
+}
+
+llink Next(llink x) {
+	return x->next;
+}
+
+int Item(llink x) {
+	return x->item;
+}
+
+void demonstrate_alloc_nodes(int N, int M) {
+	int i;
+	Node t, x;
+	for (i = 2, x = allocNode(1); i <= N; i++) {
+		t = allocNode(i);
+		insertNext(x, t);
+		x = t;
+	}
+	while (x != Next(x)) {
+		for (i = 1; i < M; i++) x = Next(x);
+		freeNode(deleteNext(x));
+	}
+	printf("%d\n", Item(x));
+}
+
+void demonstrate_init_list(int N, int M) {
+	int i;
+	Node t, x;
+	initNodes(N);
+	for (i = 2, x = newNode(1); i <= N; i++) {
+		t = newNode(i);
+		insertNext(x, t);
+		x = t;
+	}
+	while (x != Next(x)) {
+		for (i = 1; i < M; i++) x = Next(x);
+		forgetNode(deleteNext(x));
+	}
+	printf("%d\n", Item(x));
+}
 
 int main(int argc, char **argv)
 {
@@ -58,6 +143,13 @@ int main(int argc, char **argv)
 	}
 	printf("%d\n", x->item);
 	free(x);
+
+	long int start_time = time(0);
+	printf("%ld\n", time(0) - start_time);
+	demonstrate_init_list(10 ^ 8, 2);
+	printf("%ld\n", time(0) - start_time);
+	demonstrate_alloc_nodes(10 ^ 8, 2);
+	printf("%ld\n", time(0) - start_time);
 	return 0;
 }
 

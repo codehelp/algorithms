@@ -67,7 +67,7 @@ int main(int argc, char **argv)
 	}
 	printf("\n");
 
-	b = &headb;
+	b = &headb; // sorted linked list
 	b->next = NULL;
 	s = b; // store start of the sorted list
 

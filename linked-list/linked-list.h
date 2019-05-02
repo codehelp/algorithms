@@ -27,3 +27,17 @@ struct node {
 	int item;
 	llink next;
 };
+
+typedef llink Node;
+
+llink allocNode(int);
+void freeNode(llink x);
+void insertNext(llink, llink);
+llink deleteNext(llink);
+llink Next(llink);
+int Item(llink);
+
+/* FIXME: remove? */
+void initNodes(int);
+llink newNode(int);
+void forgetNode(llink);
