@@ -25,7 +25,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define V 100
+#define V 10
 
 int main(int argc, char **argv)
 {
@@ -45,6 +45,20 @@ int main(int argc, char **argv)
 		adj_matrix[i][j] = 1;
 		adj_matrix[j][i] = 1;
 	}
+	printf(" ");
+	for (i = 0; i < V; i++) {
+		printf(" %d", i);
+	}
+	printf("\n");
+	for (i = 0; i < V; i++) {
+		printf("%d ", i);
+		for (j = 0; j < V; j++) {
+			if (adj_matrix[i][j] == 1) printf("* ");
+			if (adj_matrix[i][j] == 0) printf("  ");
+		}
+		printf("\n");
+	}
+	printf("\n");
 	/* alternative using linked lists
 	 * Uses space of V + E (number of pairs of integers)
 	 * better for sparse graphs.
