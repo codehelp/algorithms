@@ -1,5 +1,5 @@
 /*
- * vertices.c
+ * graph.c
  *
  * Copyright 2019 Neil Williams <linux@codehelp.co.uk>
  *
@@ -23,42 +23,34 @@
 
 
 #include <stdio.h>
-#include <stdlib.h>
 #include "vertices.h"
 
-void setup_matrix(int adj_matrix[V][V]) {
-	int i, j;
-	for (i = 0; i < V; i++)
-		for (j = 0; j < V; j++)
-			adj_matrix[i][j] = 0;
-	// all points point to themselves
-	for (i = 0; i < V; i++) adj_matrix[i][i] = 1;
-}
-
-void add_edge(int a, int b, int adj_matrix[V][V]) {
+int main(int argc, char **argv)
+{
 	/*
-	 * Note: this is only about being adjacent.
-	 * Calculation of paths longer than > 1 edge is not efficient.
-	 * all defined points a bidirectional.
+	 * matrix uses the space of V^2
+	 * use for dense graphs
+	 * constant time to find an edge between i and j
 	 */
-	adj_matrix[a][b] = 1;
-	adj_matrix[b][a] = 1;
-}
+	int i, j, adj_matrix[V][V];
+	setup_matrix(adj_matrix);
 
-void output_matrix(int adj_matrix[V][V]) {
-	int i, j;
-	printf(" ");
-	for (i = 0; i < V; i++) {
-		printf(" %d", i);
+	while (scanf("%d %d", &i, &j) == 2) {
+		add_edge(i, j, adj_matrix);
 	}
-	printf("\n");
-	for (i = 0; i < V; i++) {
-		printf("%d ", i);
-		for (j = 0; j < V; j++) {
-			if (adj_matrix[i][j] == 1) printf("* ");
-			if (adj_matrix[i][j] == 0) printf("  ");
-		}
-		printf("\n");
+	output_matrix(adj_matrix);
+	/* alternative using linked lists
+	 * Uses space of V + E (number of pairs of integers)
+	 * better for sparse graphs.
+	 * faster processing for all edges in the graph
+	*/
+	/*
+	int adj_list[V];
+	for (i = 0; i < V; i++) adj_list[i] = NULL;
+	while (scanf("%d %d", &i, &j) == 2) {
+		adj_list[j] = allocNode(i, adj[j]);
+		adj_list[i] = allocNode(i, adj[i]);
 	}
-	printf("\n");
+	*/
+	return 0;
 }
