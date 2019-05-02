@@ -21,11 +21,9 @@
  *
  */
 
-typedef struct Point point;
-struct Point {
-	int x;
-	int y;
-};
+typedef struct { float x; float y;} point;
+
+float distance(point, point);
 
 /* Linked list of Point types */
 typedef struct node * plink;

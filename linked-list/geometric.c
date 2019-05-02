@@ -32,9 +32,15 @@ int G;
 float d;
 int count = 0;
 
-int distance(point a, point b) {
+float randFloat() {
+	return 1.0*rand()/RAND_MAX;
+}
 
-	return 0;
+float distance(point a, point b) {
+	float dx = a.x - b.x;
+	float dy = a.y - b.y;
+	//distance is a hypotenuse
+	return sqrt(dx * dx + dy * dy);
 }
 
 void gridinsert(float x, float y) {
@@ -76,7 +82,7 @@ int main(int argc, char **argv)
 			grid[i][j] = NULL;
 
 	for (i = 0; i < N; i++)
-		gridinsert((float)(rand() % 100), (float)(rand() % 100));
+		gridinsert(randFloat(), randFloat());
 	printf("%d edges shorter than %f\n", count, d);
 	return 0;
 }
