@@ -71,6 +71,16 @@ int main(int argc, char **argv)
 {
 	int i, j, N = atoi(argv[1]);
 	d = atof(argv[2]);
+	if (N <= 1) {
+		printf("Number of iterations must be "
+			"an integer greater than 1\n");
+		return 1;
+	}
+	if (d > 1.0) {
+		printf("Line length must be a float and "
+			"less than or equal to 1.00\n");
+		return 2;
+	}
 	G = 1 / d;
 
 	srand(time(0));  // ensure different numbers on each run
