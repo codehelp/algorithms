@@ -69,10 +69,21 @@ plink **malloc_2d(int r, int c) {
 
 int main(int argc, char **argv)
 {
+	/*
+	 * Builds N randomly generated points in the unit square
+	 * and checks the number of edges shorter than d.
+	 * N must be an integer greater than 1
+	 * d must be a floating point number between 0.00 and 1.00
+	 * The square is divided into a grid which is a
+	 * two dimensional array of linked lists. One list for each
+	 * grid square. All points within distance d of any given
+	 * point are either in the same grid square of an adjacent
+	 * grid square.
+	 */
 	int i, j, N = atoi(argv[1]);
 	d = atof(argv[2]);
 	if (N <= 1) {
-		printf("Number of iterations must be "
+		printf("The number of random points must be "
 			"an integer greater than 1\n");
 		return 1;
 	}
