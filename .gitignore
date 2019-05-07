@@ -5,4 +5,6 @@ linked-list/linked-list
 linked-list/sorting
 linked-list/geometric
 graph/vertices
+abstract/lifo-stack/llist
 *.o
+*.gch
