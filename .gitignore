@@ -6,6 +6,7 @@ linked-list/sorting
 linked-list/geometric
 graph/vertices
 abstract/lifo-stack/llist
-abstract/lifo-stack/mintest
+abstract/union-find/union-find
+mintest
 *.o
 *.gch
