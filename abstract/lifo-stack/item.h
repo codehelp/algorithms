@@ -21,4 +21,9 @@
  *
  */
 
+/* Type of the values to be stored on the stack
+ * Weakness here is that item.h needs to be changed
+ * for each different type to be put onto the stack.
+ * Stack cannot handle multiple types.
+ */
 typedef int Item;

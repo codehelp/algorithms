@@ -1,5 +1,5 @@
 /*
- * stack.h
+ * mintest.h
  *
  * Copyright 2019 Neil Williams <linux@codehelp.co.uk>
  *
@@ -21,12 +21,6 @@
  *
  */
 
-#include "item.h"
-
-void STACKinit(int);
-
-int STACKempty(void);
-
-void STACKpush(Item);
-
-Item STACKpop(void);
+#define mu_assert(message, test) do { if (!(test)) return message; } while (0)
+#define mu_run_test(test) do { char *message = test(); tests_run++; \
+                                if (message) return message; } while (0)

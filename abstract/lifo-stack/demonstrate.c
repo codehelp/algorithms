@@ -30,33 +30,36 @@
 
 int main(int argc, char **argv)
 {
+	/* LIFO stack implementation
+	 * The internal linked list is not exposed.
+	 */
 	char *a = argv[1];
 	int i, N = strlen(a);
 
-	STACKinit();
+	stackInit();
 	for (i = 0; i < N; i++) {
 		if ((a[i] >= '0') && (a[i] <= '9')) {
-			STACKpush(convert_char(a[i]));
+			stackPush(charToInt(a[i]));
 		}
 		if (a[i] == '+') {
-			STACKpush(STACKpop() + STACKpop());
+			stackPush(stackPop() + stackPop());
 		}
 		if (a[i] == '-') {
-			int x = STACKpop();
-			int y = STACKpop();
+			int x = stackPop();
+			int y = stackPop();
 			printf("%d / %d\n", y, x);
-			STACKpush(y - x);
+			stackPush(y - x);
 		}
 		if (a[i] == '*') {
-			STACKpush(STACKpop() * STACKpop());
+			stackPush(stackPop() * stackPop());
 		}
 		if (a[i] == '/') {
-			int x = STACKpop();
-			int y = STACKpop();
+			int x = stackPop();
+			int y = stackPop();
 			printf("%d / %d\n", y, x);
-			if (x != 0) STACKpush((int) (y / x));
+			if (x != 0) stackPush((int) (y / x));
 		}
 	}
-	printf("%d \n", STACKpop());
+	printf("%d \n", stackPop());
 	return 0;
 }

@@ -27,36 +27,51 @@
 #include "item.h"
 #include "array-llist.h"
 
-llist NEW(Item item, llist next) {
-	llist x = malloc(sizeof *x);
+lList stackNewItem(Item item, lList next) {
+	lList x = malloc(sizeof *x);
 	x->item = item;
 	x->next = next;
 	return x;
 }
 
-static llist head;
+static lList head;
 
-void STACKinit(void) {
+void stackInit(void) {
 	head = NULL;
 }
 
-int STACKempty(void) {
+int stackEmpty(void) {
+	/* empty stack is simply an empty linked list */
 	return head == NULL;
 }
 
-void STACKpush(Item item) {
-	head = NEW(item, head);
+int stackPush(Item item) {
+	/* Needs a check: if (item == errval) {return errval;}
+	 * once errval is defined.
+	 */
+	head = stackNewItem(item, head);
+	return 0;
 }
 
-Item STACKpop(void) {
+Item stackPop(void) {
+	/* No protection from stackEmpty
+	 * stackPop on an empty list will seg fault.
+	 * A full API would need to restrict one specific
+	 * Item value to a reserved error state which could
+	 * be returned: if (stackEmpty()) {return errval};
+	 */
 	Item item = head->item;
-	llist t = head->next;
+	lList t = head->next;
 	free(head);
 	head = t;
 	return item;
 }
 
-int convert_char(char a) {
+int charToInt(char a) {
+	/* Convert char '<digit>' to int <digit>
+	 * (atoi requires null terminated const char *)
+	 * This function can take const char * [index]
+	 */
 	int t = 0;
 	t = 10 * t + (a - '0');
 	return t;

@@ -21,22 +21,28 @@
  *
  */
 
-#include <stdlib.h>
 #include "item.h"
 
+/* Convert char '<digit>' to int <digit>
+ * (atoi requires const char *)
+ * May produce unexpected results if char is not within 0 to 9
+ * Only used by the demonstration program to handle argv[]
+ */
+int charToInt(char a);
 
-int convert_char(char a);
-
-typedef struct STACKnode * llist;
-struct STACKnode {
+/* struct used to create a linked list */
+typedef struct StackNode * lList;
+struct StackNode {
 	Item item;
-	llist next;
+	lList next;
 };
 
-void STACKinit(void);
+lList stackNewItem(Item item, lList next);
 
-int STACKempty(void);
+void stackInit(void);
 
-void STACKpush(Item item);
+int stackEmpty(void);
 
-Item STACKpop(void);
+int stackPush(Item item);
+
+Item stackPop(void);
