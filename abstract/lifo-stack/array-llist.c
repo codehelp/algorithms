@@ -28,6 +28,9 @@
 #include "array-llist.h"
 
 lList stackNewItem(Item item, lList next) {
+	/* TODO: handle lList x == NULL
+	 * if malloc fails.
+	 * return errval instead of x. */
 	lList x = malloc(sizeof *x);
 	x->item = item;
 	x->next = next;
