@@ -1,5 +1,5 @@
 /*
- * stack.c
+ * array-llist.h
  *
  * Copyright 2019 Neil Williams <linux@codehelp.co.uk>
  *
