@@ -4,6 +4,7 @@ heads
 linked-list/linked-list
 linked-list/sorting
 linked-list/geometric
+linked-list/recursive
 graph/vertices
 abstract/lifo-stack/llist
 abstract/union-find/union-find
