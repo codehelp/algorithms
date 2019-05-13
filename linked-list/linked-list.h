@@ -37,6 +37,13 @@ llink deleteNext(llink);
 llink Next(llink);
 int Item(llink);
 
+/* recursive routines */
+int count (llink);
+void traverse(llink, void (*)(llink));
+void traverseBack(llink, void (*)(llink));
+llink delete(llink, int);
+
+
 /* FIXME: remove? */
 void initNodes(int);
 llink newNode(int);

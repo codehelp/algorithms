@@ -115,6 +115,41 @@ void demonstrate_init_list(int N, int M) {
 	printf("%d\n", Item(x));
 }
 
+int count (llink x) {
+	if (x == NULL) return 0;
+	return 1 + count(x->next);
+}
+
+void traverse(llink h, void (*visit)(llink)) {
+	/* Apply one function to all nodes in the list
+	 * function must return void and accept a single argument, llink.
+	 */
+	if (h == NULL) return;
+	(*visit)(h);
+	traverse(h->next, visit);
+}
+
+void traverseBack(llink h, void (*visit)(llink)) {
+	if (h == NULL) return;
+	/* traverse to the end, then unwind */
+	traverseBack(h->next, visit);
+	(*visit)(h);
+}
+
+llink delete(llink x, int v) {
+	if (x == NULL) return NULL;
+	/* needs to use eq(x->item, v) instead of ==
+	 * if eq() is defined for the typedef Item
+	 */
+	if (x->item == v) {
+		llink t = Next(x);
+		freeNode(x);
+		return t;
+	}
+	x->next = delete(x->next, v);
+	return x;
+}
+
 void demonstrate_adjacency(int V) {
 	int i, j;
 	llink adj[V];
