@@ -1,5 +1,5 @@
 /*
- * treelink.h
+ * demonstrate.c
  *
  * Copyright 2019 Neil Williams <linux@codehelp.co.uk>
  *
@@ -21,30 +21,16 @@
  *
  */
 
-typedef struct node *Tlink;
-typedef int Item;
 
-struct node {
-	Item item;
-	Tlink parent;
-	Tlink left;
-	Tlink right;
-};
+#include <stdio.h>
+#include "treelink.h"
 
-void QueueInit(void);
+int main(int argc, char **argv)
+{
+	Item items[] = {0, 1, 2, 3, 4};
+	int length = sizeof(items) / sizeof(Item);
+	Tlink demo_tree = QueueFill(items, items[0], length);
+	recurseDraw(demo_tree, 0);
+	return 0;
+}
 
-int QueueEmpty(void);
-
-Tlink QueueNewItem(Item, Tlink, Tlink);
-
-Tlink QueueFill(Item [], int, int);
-
-void QueuePut(Tlink);
-
-Tlink QueueGet(void);
-
-void recurseTree(Tlink, void (*)(Tlink));
-
-void traverseTree(Tlink, void(*)(Tlink));
-
-void recurseDraw(Tlink, int);

@@ -1,6 +1,5 @@
 all:
-	# $(CC) -g treelink.c queue.c -o treelink
-	$(CC) -g treelink.c queue.c
+	$(CC) -g treelink.c queue.c demonstrate.c -o treelink
 
 #check:
 #	gcc -lm mintest.c array-llist.c -o mintest

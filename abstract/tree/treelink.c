@@ -22,6 +22,7 @@
  */
 
 #include <stdlib.h>
+#include <stdio.h>
 #include "treelink.h"
 
 void traverseTree(Tlink head, void(*visit)(Tlink)) {
@@ -37,4 +38,36 @@ void traverseTree(Tlink head, void(*visit)(Tlink)) {
 		if (head->left != NULL) QueuePut(head->left);
 		if (head->right != NULL) QueuePut(head->right);
 	}
+}
+
+int recurseCount (Tlink head) {
+	if (head == NULL) return 0;
+	return recurseCount(head->left) + recurseCount(head->right) + 1;
+}
+
+int recurseHeight (Tlink head) {
+	int u, v;
+	if (head == NULL) return -1;
+	u = recurseHeight(head->left);
+	v = recurseHeight(head->right);
+	if (u > v) return u + 1;
+	else return v + 1;
+}
+
+void printNode(Item item, int h) {
+	int i;
+	for (i = 0; i < h; i++) printf(" ");
+	if (item < 10) item += '0';
+	printf("%c\n", (char) item);
+}
+
+void recurseDraw(Tlink x, int h) {
+	/* initialise drawing with h = 0 */
+	if (x == NULL) {
+		printNode('*', h);
+		return;
+	}
+	recurseDraw(x->right, h + 1);
+	printNode(x->item, h);
+	recurseDraw(x->left, h + 1);
 }

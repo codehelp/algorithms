@@ -34,6 +34,33 @@ void QueueInit(void) {
 	head = NULL;
 }
 
+Tlink QueueNewItem(Item item, Tlink left, Tlink right) {
+	Tlink newest = malloc(sizeof * newest);
+	newest->item = item;
+	newest->left = left;
+	newest->right = right;
+	newest->parent = NULL;
+	return newest;
+}
+
+Tlink QueueFill(Item items[], int list_start, int list_end) {
+	int m = (list_start + list_end) / 2;
+	Item u, v;
+	Tlink newest = QueueNewItem(items[m], NULL, NULL);
+	if (list_start == list_end) return newest;
+	newest->left = QueueFill(items, list_start, m);
+	newest->right = QueueFill(items, m + 1, list_end);
+	u = newest->left->item;
+	v = newest->right->item;
+	/* FIXME: relies on the nature of Item */
+	if (u > v) {
+		newest->item = u;
+	} else {
+		newest->item = v;
+	}
+	return newest;
+}
+
 int QueueEmpty(void) {
 	return head == NULL;
 }

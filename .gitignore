@@ -8,6 +8,7 @@ linked-list/recursive
 graph/vertices
 abstract/lifo-stack/llist
 abstract/union-find/union-find
+abstract/tree/treelink
 mintest
 *.o
 *.gch
