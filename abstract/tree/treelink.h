@@ -21,18 +21,22 @@
  *
  */
 
-#include "item.h"
-#include "array-llist.h"
-
 typedef struct node *Tlink;
 
 struct node {
-	Item item;
 	Tlink parent;
 	Tlink left;
 	Tlink right;
 };
 
+void QueueInit(void);
+
+int QueueEmpty(void);
+
+void QueuePut(Tlink);
+
+Tlink QueueGet(void);
+
 void recurseTree(Tlink head, void (*visit)(Tlink));
 
-void traverseTree(lList head, void(*visit)(lList));
+void traverseTree(Tlink head, void(*visit)(Tlink));

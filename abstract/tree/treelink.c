@@ -23,30 +23,18 @@
 
 #include <stdlib.h>
 #include "treelink.h"
-#include "item.h"
 
-
-void recurseTree(Tlink head, void (*visit)(Tlink)) {
-	/* recursive - preserves the structure of the tree */
-	if (head == NULL) return;
-	(*visit)(head);
-	recurseTree(head->left, visit);
-	recurseTree(head->right, visit);
-}
-
-void traverseTree(lList head, void(*visit)(lList)) {
+void traverseTree(Tlink head, void(*visit)(Tlink)) {
 	/* copies the structure of the tree into a stack
 	 * for processing. */
 	
 	/* TODO: array-llist.c needs modification to return
 	 * the node, not the item.
-	 *
-	stackInit();
-	stackPush(head);
-	while (!stackEmpty()) {
-		(*visit)(head = stackPop());
-		if (head->right != NULL) stackPush(head->right);
-		if (head->left != NULL) stackPush(head->left);
+	 */
+	QueueInit();
+	while (!QueueEmpty()) {
+		(*visit)(head = QueueGet());
+		if (head->left != NULL) QueuePut(head->left);
+		if (head->right != NULL) QueuePut(head->right);
 	}
-	*/
 }
