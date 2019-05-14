@@ -57,6 +57,7 @@ int recurseHeight (Tlink head) {
 void printNode(Item item, int h) {
 	int i;
 	for (i = 0; i < h; i++) printf(" ");
+	/* Item from the list is int but markers from recurseDraw are char */
 	if (item < 10) item += '0';
 	printf("%c\n", (char) item);
 }

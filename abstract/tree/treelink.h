@@ -22,6 +22,11 @@
  */
 
 typedef struct node *Tlink;
+
+/* It would be convenient to not use int but
+ * the Item needs an equality operator and
+ * using char causes problems with QueueFill.
+ */
 typedef int Item;
 
 struct node {
