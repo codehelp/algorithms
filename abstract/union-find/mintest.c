@@ -31,8 +31,8 @@ int tests_run = 0;
 int check(const int array[], int n)
 {
 	const int a0 = array[0];
-
-	for (int i = 1; i < n; i++)
+	int i;
+	for (i = 1; i < n; i++)
 	{
 		if (array[i] != a0) {
 			return 1;
