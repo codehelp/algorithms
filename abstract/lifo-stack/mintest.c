@@ -31,14 +31,17 @@ int tests_run = 0;
 
 static char * test_conversions() {
 	const char * str_base = "0123456789";
-	for (int i = 0; i < strlen(str_base); i++) {
+	int i, len;
+	len = strlen(str_base);
+	for (i = 0; i < len; i++) {
 		mu_assert(
 			"error, str_base charToInt conversion failed", 
 			(2 * charToInt(str_base[i]) == (2 * i)));
 	}
 	/* base needs to be null terminated for strlen */
 	const char base[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '\0'};
-	for (int i = 0; i < strlen(base); i++) {
+	len = strlen(base);
+	for (i = 0; i < len; i++) {
 		mu_assert(
 			"error, base charToInt conversion failed", 
 			(2 * charToInt(base[i]) == (2 * i)));
