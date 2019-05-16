@@ -31,8 +31,8 @@
 int check(const int array[], int n)
 {
 	const int a0 = array[0];
-
-	for (int i = 1; i < n; i++)
+	int i;
+	for (i = 1; i < n; i++)
 	{
 		if (array[i] != a0) {
 			return 1;
@@ -44,8 +44,8 @@ int check(const int array[], int n)
 double average(const int array[], int n)
 {
 	int sum = 0;
-
-	for (int i = 0; i < n; i++)
+	int i;
+	for (i = 0; i < n; i++)
 	{
 		sum += array[i] - 1;
 	}
